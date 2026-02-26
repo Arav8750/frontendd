@@ -1,45 +1,59 @@
 import { useState } from "react"
 import axios from "axios"
 
-function Reg()
-{
-  const [data,setData]=useState(
-    {
-      username:"",
-      email:"",
-      password:""
-    }
-  )
+function Reg() {
 
-  const changeName = (e)=>
-  {
-    setData({...data,[e.target.name]:e.target.value})
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    password: ""
+  })
+
+  const changeName = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value })
   }
-   const submit = async ()=>
-  {
-    try
-    {
-        //const res=await axios.post("http://localhost:8080/register",data)
-        const res = await axios.post(
-            "https://demoo-2.onrender.com/register"
-            data
-        )
-           alert(res.data)
 
-    }
-    catch(xyz)
-    {
-        alert(xyz.response?.data || "Error")
+  const submit = async () => {
+    try {
+
+      const res = await axios.post(
+        "https://demoo-2.onrender.com/register",
+        data
+      )
+
+      alert(res.data)
+
+    } catch (err) {
+      alert(err.response?.data || "Error occurred")
     }
   }
-return(
+
+  return (
     <>
-       <h1> i am App</h1>
-       <input onChange={changeName} name="username" placeholder="enter username"/>
-       <input onChange={changeName} name="email" placeholder="enter email"/>
-       <input onChange={changeName} name="password" placeholder="enter password"/>
-       <button onClick={submit}>register</button>
+      <h1>Register</h1>
+
+      <input
+        onChange={changeName}
+        name="username"
+        placeholder="Enter username"
+      />
+
+      <input
+        onChange={changeName}
+        name="email"
+        placeholder="Enter email"
+      />
+
+      <input
+        onChange={changeName}
+        name="password"
+        type="password"
+        placeholder="Enter password"
+      />
+
+      <button onClick={submit}>Register</button>
     </>
-   ) 
+  )
 }
-export default Reg 
+
+export default Reg
